@@ -8,7 +8,7 @@ window.COEDUCA_CONFIG = {
     "8° Grado A":       "#",
     "9° Grado A":       "#",
     "1° Bto. Gral. A":  "#",
-    "2° Bto. Gral. A":  "#"
+    "2° Bto. Gral. A":  "https://drive.google.com/drive/folders/11sxk7XZBn_T2xA3OOvGR6ol-nrzXZ_F0?usp=sharing"
   },
 
   anuncios: [
