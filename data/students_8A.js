@@ -15,7 +15,7 @@
   { nie: "20305579", nombre: "Henríquez Chirino, Estiven Alexander",   grado: "8° Grado A", nacimiento: "15/06/2012", sexo: "M" },
   { nie: "20305581", nombre: "Manueles Pereira, Keily Yaritza",        grado: "8° Grado A", nacimiento: "05/07/2011", sexo: "F" },
   { nie: "20176667", nombre: "Martínez Flores, Gisela Lisbeth",        grado: "8° Grado A", nacimiento: "14/03/2012", sexo: "F" },
-  { nie: "20176668", nombre: "Martínez Lazo, Ederson Osiel",           grado: "8° Grado A", nacimiento: "05/12/2011", sexo: "M" },
+  { nie: "20176668", nombre: "Martínez Lazo, Ederson Osiel",           grado: "8° Grado A", nacimiento: "05/12/2011", sexo: "M", demeritos_url: "https://docs.google.com/spreadsheets/d/19FjOkTHzszbyPd8IyLzj40gaVPfXf7zrdoJRsZfaGxQ/edit?usp=sharing" },
   { nie: "20179890", nombre: "Mejía Carbajal, Ezequiel Vladimir",      grado: "8° Grado A", nacimiento: "31/07/2012", sexo: "M" },
   { nie: "20179891", nombre: "Meléndez Corvera, Raúl Ernesto",         grado: "8° Grado A", nacimiento: "22/06/2012", sexo: "M" },
   { nie: "20293665", nombre: "Pérez Barahona, Katherine Alejandra",    grado: "8° Grado A", nacimiento: "05/04/2011", sexo: "F" },
