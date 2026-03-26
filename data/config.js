@@ -4,10 +4,10 @@
 window.COEDUCA_CONFIG = {
 
   calificaciones_urls: {
-    "7° Grado A":       "#",
-    "8° Grado A":       "#",
-    "9° Grado A":       "#",
-    "1° Bto. Gral. A":  "#",
+    "7° Grado A":       "https://docs.google.com/spreadsheets/d/1Lb4dihzUki7-bc-5ME-dyZFBvvAOJg2W12Z3NNcDqJU/edit?usp=sharing",
+    "8° Grado A":       "https://docs.google.com/spreadsheets/d/1bPoS13K_zrfOUh8Sv-CHF_GNeM73j9So_shGIUnUAB4/edit?usp=sharing",
+    "9° Grado A":       "https://docs.google.com/spreadsheets/d/1NS2uXOHlW2nrvcD0CorsIftRcatfAFKN9z3pXJawuYU/edit?usp=sharing",
+    "1° Bto. Gral. A":  "https://docs.google.com/spreadsheets/d/1VOoVlkZKeefrAXD2KgVMCR9wQ2So7N8epoflUsqGiOQ/edit?usp=sharing",
     "2° Bto. Gral. A":  "https://docs.google.com/spreadsheets/d/1Tx2tHpFIKkdw7wPFja0fGwGxtyvK-fcspFOl2vE_c38/edit?usp=sharing"
   },
 
