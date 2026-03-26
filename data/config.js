@@ -82,21 +82,20 @@ window.HORARIOS = {
 
   "7° Grado A": {
     periodos: [
-      { hora: "7:00 – 7:45",   etiqueta: "1° Período" },
-      { hora: "7:45 – 8:30",   etiqueta: "2° Período" },
-      { hora: "8:30 – 9:15",   etiqueta: "3° Período" },
-      { hora: "9:15 – 10:00",  etiqueta: "4° Período" },
-      { hora: "10:00 – 10:20", etiqueta: "RECREO",     recreo: true },
-      { hora: "10:20 – 11:05", etiqueta: "5° Período" },
-      { hora: "11:05 – 11:50", etiqueta: "6° Período" },
-      { hora: "11:50 – 12:35", etiqueta: "7° Período" }
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
     ],
     dias: {
-      "Lunes":      ["Matemáticas",    "Lenguaje",      "Ciencias Nat.",  "Ed. Física",    null, "Historia",      "Artística",     "Computación"],
-      "Martes":     ["Lenguaje",       "Matemáticas",   "Inglés",         "C. Sociales",   null, "Ciencias Nat.", "Matemáticas",   "Orientación"],
-      "Miércoles":  ["C. Sociales",    "Inglés",        "Matemáticas",    "Lenguaje",      null, "Ed. Física",    "Historia",      "Matemáticas"],
-      "Jueves":     ["Inglés",         "Ciencias Nat.", "Lenguaje",       "Matemáticas",   null, "Artística",     "Computación",   "C. Sociales"],
-      "Viernes":    ["Historia",       "C. Sociales",   "Ed. Física",     "Inglés",        null, "Lenguaje",      "Orientación",   "Ciencias Nat."]
+      "Lunes":     ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Martes":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Miércoles": ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
     aseo: {
       descripcion: "Rotación semanal de limpieza del aula",
@@ -139,21 +138,20 @@ window.HORARIOS = {
 
   "9° Grado A": {
     periodos: [
-      { hora: "7:00 – 7:45",   etiqueta: "1° Período" },
-      { hora: "7:45 – 8:30",   etiqueta: "2° Período" },
-      { hora: "8:30 – 9:15",   etiqueta: "3° Período" },
-      { hora: "9:15 – 10:00",  etiqueta: "4° Período" },
-      { hora: "10:00 – 10:20", etiqueta: "RECREO",     recreo: true },
-      { hora: "10:20 – 11:05", etiqueta: "5° Período" },
-      { hora: "11:05 – 11:50", etiqueta: "6° Período" },
-      { hora: "11:50 – 12:35", etiqueta: "7° Período" }
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
     ],
     dias: {
-      "Lunes":      ["Matemáticas",    "Física",        "Química",        "Inglés",        null, "Historia",      "Ed. Física",    "Computación"],
-      "Martes":     ["Lenguaje",       "Matemáticas",   "C. Sociales",    "Química",       null, "Inglés",        "Física",        "Artística"],
-      "Miércoles":  ["C. Sociales",    "Inglés",        "Matemáticas",    "Lenguaje",      null, "Ed. Física",    "Orientación",   "Matemáticas"],
-      "Jueves":     ["Inglés",         "Química",       "Lenguaje",       "Matemáticas",   null, "Artística",     "Computación",   "C. Sociales"],
-      "Viernes":    ["Historia",       "C. Sociales",   "Ed. Física",     "Física",        null, "Lenguaje",      "Orientación",   "Química"]
+      "Lunes":     ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Martes":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Miércoles": ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
     aseo: {
       descripcion: "Rotación semanal de limpieza del aula",
@@ -168,21 +166,20 @@ window.HORARIOS = {
 
   "1° Bto. Gral. A": {
     periodos: [
-      { hora: "7:00 – 7:45",   etiqueta: "1° Período" },
-      { hora: "7:45 – 8:30",   etiqueta: "2° Período" },
-      { hora: "8:30 – 9:15",   etiqueta: "3° Período" },
-      { hora: "9:15 – 10:00",  etiqueta: "4° Período" },
-      { hora: "10:00 – 10:20", etiqueta: "RECREO",     recreo: true },
-      { hora: "10:20 – 11:05", etiqueta: "5° Período" },
-      { hora: "11:05 – 11:50", etiqueta: "6° Período" },
-      { hora: "11:50 – 12:35", etiqueta: "7° Período" }
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
     ],
     dias: {
-      "Lunes":      ["Matemáticas",    "Literatura",    "Biología",       "Inglés",        null, "Historia Univ.", "Ed. Física",   "Computación"],
-      "Martes":     ["Literatura",     "Matemáticas",   "Filosofía",      "Biología",      null, "Inglés",         "Física",       "Arte"],
-      "Miércoles":  ["Filosofía",      "Inglés",        "Matemáticas",    "Literatura",    null, "Ed. Física",     "Orientación",  "Matemáticas"],
-      "Jueves":     ["Inglés",         "Biología",      "Literatura",     "Matemáticas",   null, "Arte",           "Computación",  "Filosofía"],
-      "Viernes":    ["Historia Univ.", "Filosofía",     "Ed. Física",     "Física",        null, "Literatura",     "Orientación",  "Biología"]
+      "Lunes":     ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Martes":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Miércoles": ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
     aseo: {
       descripcion: "Rotación semanal de limpieza del aula",
@@ -194,24 +191,23 @@ window.HORARIOS = {
       ]
     }
   },
-
-  "2° Bto. Gral. A": {
+  
+"2° Bto. Gral. A": {
     periodos: [
-      { hora: "7:00 – 7:45",   etiqueta: "1° Período" },
-      { hora: "7:45 – 8:30",   etiqueta: "2° Período" },
-      { hora: "8:30 – 9:15",   etiqueta: "3° Período" },
-      { hora: "9:15 – 10:00",  etiqueta: "4° Período" },
-      { hora: "10:00 – 10:20", etiqueta: "RECREO",     recreo: true },
-      { hora: "10:20 – 11:05", etiqueta: "5° Período" },
-      { hora: "11:05 – 11:50", etiqueta: "6° Período" },
-      { hora: "11:50 – 12:35", etiqueta: "7° Período" }
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
     ],
     dias: {
-      "Lunes":      ["Cálculo",        "Literatura",    "Química Org.",   "Inglés",        null, "Historia Cont.", "Ed. Física",   "Seminario"],
-      "Martes":     ["Literatura",     "Cálculo",       "Filosofía",      "Química Org.",  null, "Inglés",         "Física",       "Arte"],
-      "Miércoles":  ["Filosofía",      "Inglés",        "Cálculo",        "Literatura",    null, "Ed. Física",     "Orientación",  "Cálculo"],
-      "Jueves":     ["Inglés",         "Química Org.",  "Literatura",     "Cálculo",       null, "Arte",           "Seminario",    "Filosofía"],
-      "Viernes":    ["Historia Cont.", "Filosofía",     "Ed. Física",     "Física",        null, "Literatura",     "Orientación",  "Química Org."]
+      "Lunes":     ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Martes":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Miércoles": ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
+      "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
     aseo: {
       descripcion: "Rotación semanal de limpieza del aula",
