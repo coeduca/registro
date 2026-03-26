@@ -192,7 +192,7 @@ window.HORARIOS = {
     }
   },
   
-"2° Bto. Gral. A": {
+  "2° Bto. Gral. A": {
     periodos: [
       { hora: "12:45 – 1:45", etiqueta: "1° Período" },
       { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
