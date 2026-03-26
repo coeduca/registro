@@ -19,5 +19,5 @@
   { nie: "20179890", nombre: "Mejía Carbajal, Ezequiel Vladimir",      grado: "8° Grado A", nacimiento: "31/07/2012", sexo: "M", demeritos_url: "" },
   { nie: "20179891", nombre: "Meléndez Corvera, Raúl Ernesto",         grado: "8° Grado A", nacimiento: "22/06/2012", sexo: "M", demeritos_url: "" },
   { nie: "20293665", nombre: "Pérez Barahona, Katherine Alejandra",    grado: "8° Grado A", nacimiento: "05/04/2011", sexo: "F", demeritos_url: "" },
-  { nie: "20305583", nombre: "Rivas López, Samuel Josué",              grado: "8° Grado A", nacimiento: "15/06/2012", sexo: "M", demeritos_url: "" },
+  { nie: "20305583", nombre: "Rivas López, Samuel Josué",              grado: "8° Grado A", nacimiento: "15/06/2012", sexo: "M" }
 );

@@ -1,16 +1,8 @@
 // ============================================================
 // CONFIGURACIÓN GENERAL — COEDUCA Portal Estudiantil 2026
 // ============================================================
-// Edita este archivo para actualizar anuncios, herramientas,
-// publicaciones, horarios y enlaces de calificaciones.
-// ============================================================
-
 window.COEDUCA_CONFIG = {
 
-  // ----------------------------------------------------------
-  // ENLACE DE CALIFICACIONES POR GRADO
-  // Reemplaza '#' con el link de Google Sheets de cada grado
-  // ----------------------------------------------------------
   calificaciones_urls: {
     "7° Grado A":       "#",
     "8° Grado A":       "#",
@@ -19,9 +11,6 @@ window.COEDUCA_CONFIG = {
     "2° Bto. Gral. A":  "#"
   },
 
-  // ----------------------------------------------------------
-  // ANUNCIOS — Aparecen en la barra lateral
-  // ----------------------------------------------------------
   anuncios: [
     {
       titulo: "¡Bienvenidos al año escolar 2026!",
@@ -30,26 +19,15 @@ window.COEDUCA_CONFIG = {
     },
   ],
 
-  // ----------------------------------------------------------
-  // HERRAMIENTAS — Aparecen en la barra lateral
-  // ----------------------------------------------------------
   herramientas: [
-    { nombre: "Google Classroom",  url: "https://classroom.google.com",              icono: "🎓" },
-    //{ nombre: "Khan Academy",      url: "https://es.khanacademy.org",                icono: "📐" },
-    { nombre: "Diccionario RAE",   url: "https://dle.rae.es",                        icono: "📖" },
-    { nombre: "YouTube Edu",       url: "https://www.youtube.com/education",         icono: "▶️" },
-    { nombre: "Duolingo",          url: "https://www.duolingo.com",                  icono: "🦜" },
-    //{ nombre: "Wolfram Alpha",     url: "https://www.wolframalpha.com",              icono: "🔢" },
-    //{ nombre: "Biblioteca Digital",url: "https://www.cervantesvirtual.com",          icono: "📚" }
+    { nombre: "Google Classroom",  url: "https://classroom.google.com", icono: "🎓" },
+    { nombre: "Diccionario RAE",   url: "https://dle.rae.es",           icono: "📖" },
+    { nombre: "YouTube Edu",       url: "https://www.youtube.com/education", icono: "▶️" },
+    { nombre: "Duolingo",          url: "https://www.duolingo.com",     icono: "🦜" },
   ],
 
-  // ----------------------------------------------------------
-  // PUBLICACIONES DEL FEED
-  // grado: "Todos" = todos los estudiantes
-  // grado: "7° Grado A" = solo ese grado
-  // imagen: URL de imagen (o null)
-  // enlace: { url: "...", texto: "Ver más" } (o null)
-  // ----------------------------------------------------------
+  // grado:"Todos" = todos | grado:"8° Grado A" = solo ese grado
+  // imagen: URL o null | enlace: { url:"...", texto:"..." } o null
   publicaciones: [
     {
       titulo: "📝 Tarea de Inglés — Numbers from 0 to 20",
@@ -67,17 +45,14 @@ window.COEDUCA_CONFIG = {
       imagen: null,
       enlace: null
     },
-   
   ]
-
 };
 
 // ==============================================================
 // HORARIOS POR GRADO
-// Edita las materias de cada día y período según corresponda.
-// Los periodos marcados con tipo:"recreo" muestran el receso.
+// tipo aseo "diario": dias[] con dia, zona[], aula[]
+// tipo aseo "semanal": grupos[] con semana, encargados[]  (legacy)
 // ==============================================================
-
 window.HORARIOS = {
 
   "7° Grado A": {
@@ -97,15 +72,7 @@ window.HORARIOS = {
       "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
-    aseo: {
-      descripcion: "Rotación semanal de limpieza del aula",
-      grupos: [
-        { semana: "Semana 1",  encargados: ["Aguilero Bonilla, K.", "Alfaro Barahona, A.", "Barrera Rivera, T."] },
-        { semana: "Semana 2",  encargados: ["Bonilla Díaz, L.", "Castillo Chirino, E.", "Chirino Alfaro, R."] },
-        { semana: "Semana 3",  encargados: ["Chirino Corvera, R.", "Córdova Martínez, E.", "Corvera Anzora, A."] },
-        { semana: "Semana 4",  encargados: ["Cruz Serrano, L.", "Flores Varela, V.", "Fuentes Ramos, A."] }
-      ]
-    }
+    aseo: null
   },
 
   "8° Grado A": {
@@ -126,12 +93,33 @@ window.HORARIOS = {
       "Viernes":   ["Matemática y Datos",  null, "Inglés", "Matemática y Datos", null, "Ciudadanía y Valores", "Ciudadanía y Valores"]
     },
     aseo: {
-      descripcion: "Rotación semanal de limpieza del aula",
-      grupos: [
-        { semana: "Semana 1",  encargados: ["Ángel Martínez, G.", "Barrera Hernández, E.", "Barrera Hernández, K."] },
-        { semana: "Semana 2",  encargados: ["Corvera Alfaro, G.", "Corvera De Paz, D.", "Corvera Flores, P."] },
-        { semana: "Semana 3",  encargados: ["Corvera Fuentes, L.", "Duran Gómez, J.", "González Corvera, H."] },
-        { semana: "Semana 4",  encargados: ["Henríquez Chirino, E.", "Manueles Pereira, K.", "Martínez Flores, G."] }
+      tipo: "diario",
+      dias: [
+        {
+          dia: "Lunes",
+          zona: ["Pérez Barahona, Katherine", "Meléndez Corvera, Raúl", "Duran Gómez, Justin"],
+          aula: ["Manueles Pereira, Keily", "Martínez Lazo, Ederson", "Henríquez Chirino, Estiven", "Rivas López, Samuel"]
+        },
+        {
+          dia: "Martes",
+          zona: ["Barrera Hernández, Karen", "Corvera Flores, Pedro", "González Corvera, Héctor"],
+          aula: ["Corvera Alfaro, Gustavo", "Pérez Barahona, Katherine", "Duran Gómez, Justin"]
+        },
+        {
+          dia: "Miércoles",
+          zona: ["Corvera Fuentes, Luis", "Manueles Pereira, Keily", "Corvera De Paz, Diego", "Rivas López, Samuel"],
+          aula: ["Ángel Martínez, Génesis", "Meléndez Corvera, Raúl", "Barrera Hernández, Emerson"]
+        },
+        {
+          dia: "Jueves",
+          zona: ["Ángel Martínez, Génesis", "Martínez Lazo, Ederson", "Barrera Hernández, Emerson"],
+          aula: ["Corvera Fuentes, Luis", "Martínez Flores, Gisela", "Corvera De Paz, Diego"]
+        },
+        {
+          dia: "Viernes",
+          zona: ["Corvera Alfaro, Gustavo", "Martínez Flores, Gisela", "Henríquez Chirino, Estiven"],
+          aula: ["Barrera Hernández, Karen", "Corvera Flores, Pedro", "González Corvera, Héctor"]
+        }
       ]
     }
   },
@@ -153,15 +141,7 @@ window.HORARIOS = {
       "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
-    aseo: {
-      descripcion: "Rotación semanal de limpieza del aula",
-      grupos: [
-        { semana: "Semana 1",  encargados: ["Aguilero Bonilla, D.", "Alfaro Barahona, D.", "Angulo Ayala, D."] },
-        { semana: "Semana 2",  encargados: ["Angulo Ayala, Y.", "Barrera Arévalo, M.", "Barrera Canjura, C."] },
-        { semana: "Semana 3",  encargados: ["Campos Fuentes, O.", "Cañas Paredes, E.", "Córdova Ascencio, G."] },
-        { semana: "Semana 4",  encargados: ["Córdova Chirino, I.", "Escamilla Vásquez, P.", "Escobar Aguilar, K."] }
-      ]
-    }
+    aseo: null
   },
 
   "1° Bto. Gral. A": {
@@ -181,17 +161,9 @@ window.HORARIOS = {
       "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
-    aseo: {
-      descripcion: "Rotación semanal de limpieza del aula",
-      grupos: [
-        { semana: "Semana 1",  encargados: ["Barahona Barrera, M.", "Barahona Chirino, J.", "Barrera Rivera, A."] },
-        { semana: "Semana 2",  encargados: ["Bonilla Díaz, K.", "Chávez Castellanos, E.", "Córdova Garmendia, M."] },
-        { semana: "Semana 3",  encargados: ["Cruz Serrano, R.", "Flores López, B.", "Fuentes Meléndez, D."] },
-        { semana: "Semana 4",  encargados: ["Hernández Alfaro, L.", "Maravilla Esquivel, Y.", "Martínez Chirino, B."] }
-      ]
-    }
+    aseo: null
   },
-  
+
   "2° Bto. Gral. A": {
     periodos: [
       { hora: "12:45 – 1:45", etiqueta: "1° Período" },
@@ -209,15 +181,6 @@ window.HORARIOS = {
       "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
     },
-    aseo: {
-      descripcion: "Rotación semanal de limpieza del aula",
-      grupos: [
-        { semana: "Semana 1",  encargados: ["Barrera Barahona, J.", "Barrera Hernández, A.", "Barrera Rodríguez, M."] },
-        { semana: "Semana 2",  encargados: ["Berrios Mejía, E.", "Cañas Chávez, A.", "Córdova Ascencio, M."] },
-        { semana: "Semana 3",  encargados: ["Cornejo Santana, O.", "Hernández Chávez, C.", "Hernández Martínez, J."] },
-        { semana: "Semana 4",  encargados: ["López Ramos, Y.", "Martínez Barrera, C.", "Mejía Angulo, W."] }
-      ]
-    }
+    aseo: null
   }
-
 };
