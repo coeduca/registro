@@ -51,7 +51,7 @@ window.COEDUCA_CONFIG = {
       fecha: "22/03/2026",
       grado: "2° Bto. Gral. A",
       imagen: "https://i.ibb.co/ym2YyLgf/pngtree-back-to-school-with-happy-kids-cartoon-design-png-image-13536153.png",
-      enlace: "https://drive.google.com/drive/folders/11sxk7XZBn_T2xA3OOvGR6ol-nrzXZ_F0?usp=sharing"
+      enlace: { url: "https://drive.google.com/drive/folders/11sxk7XZBn_T2xA3OOvGR6ol-nrzXZ_F0?usp=sharing", texto: "Ver rúbricas" }
     },
   ]
 };
