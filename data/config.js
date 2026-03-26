@@ -45,6 +45,14 @@ window.COEDUCA_CONFIG = {
       imagen: null,
       enlace: null
     },
+    {
+      titulo: "Rubricas de Inglés - A Story from The Past",
+      texto: "En este enlace podrán encontrar sus rúbricas con su calificación de la actividad de inglés (A Story from The Past)",
+      fecha: "22/03/2026",
+      grado: "2° Bto. Gral. A",
+      imagen: "https://i.ibb.co/ym2YyLgf/pngtree-back-to-school-with-happy-kids-cartoon-design-png-image-13536153.png",
+      enlace: "https://drive.google.com/drive/folders/11sxk7XZBn_T2xA3OOvGR6ol-nrzXZ_F0?usp=sharing"
+    },
   ]
 };
 
