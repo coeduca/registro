@@ -310,17 +310,20 @@
     .hor-panel{display:none;}
     .hor-panel.active{display:block;animation:fadeIn .2s ease;}
 
-    /* schedule table */
+    /* schedule table wrapper — the ::after here does NOT scroll */
+    .sched-wrap{position:relative;border-radius:var(--rm);overflow:hidden;}
+    .sched-wrap::after{
+      content:'';
+      position:absolute;top:0;right:0;bottom:0;width:28px;
+      background:linear-gradient(to right,transparent,rgba(6,17,60,.85));
+      pointer-events:none;z-index:2;
+    }
     .sched-scroll{
       width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
-      border-radius:var(--rm);position:relative;
+      border-radius:var(--rm);
     }
-    /* right-edge fade hint */
-    .sched-scroll::after{
-      content:'';position:absolute;top:0;right:0;bottom:0;width:20px;
-      background:linear-gradient(to right,transparent,rgba(6,17,60,.7));
-      pointer-events:none;border-radius:0 var(--rm) var(--rm) 0;
-    }
+    /* hide right-fade when fully scrolled */
+    .sched-scroll.scrolled-end + .sched-wrap::after{display:none;}
 
     .sched-table{border-collapse:collapse;width:max-content;min-width:100%;}
     .sched-table th{
@@ -351,12 +354,26 @@
     .sched-table .today-col{background:rgba(56,189,248,.07)!important;}
 
     .aseo-section{margin-top:1rem;}
-    .aseo-title{font-size:.68rem;color:var(--cyan);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.7rem;}
-    .aseo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.5rem;}
-    .aseo-card{
-      background:rgba(255,255,255,.03);border:1px solid rgba(56,189,248,.15);
-      border-radius:var(--rm);padding:.65rem .8rem;
+    .aseo-title{font-size:.68rem;color:var(--cyan);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.8rem;}
+    /* daily aseo layout */
+    .aseo-day{margin-bottom:.75rem;}
+    .aseo-day:last-child{margin-bottom:0;}
+    .aseo-day-head{
+      font-size:.72rem;font-weight:700;color:var(--white);
+      background:rgba(14,165,233,.14);border-radius:6px 6px 0 0;
+      padding:.38rem .7rem;border:1px solid rgba(56,189,248,.2);border-bottom:none;
     }
+    .aseo-day-body{
+      display:grid;grid-template-columns:1fr 1fr;gap:0;
+      border:1px solid rgba(56,189,248,.2);border-radius:0 0 6px 6px;overflow:hidden;
+    }
+    .aseo-col{padding:.55rem .7rem;background:rgba(255,255,255,.02);}
+    .aseo-col:first-child{border-right:1px solid rgba(56,189,248,.15);}
+    .aseo-col-head{font-size:.63rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.35rem;}
+    .aseo-col-names{font-size:.72rem;color:var(--dim);line-height:1.6;}
+    /* legacy weekly aseo */
+    .aseo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.5rem;}
+    .aseo-card{background:rgba(255,255,255,.03);border:1px solid rgba(56,189,248,.15);border-radius:var(--rm);padding:.65rem .8rem;}
     .aseo-week{font-size:.67rem;color:var(--cyan);font-weight:600;margin-bottom:.3rem;}
     .aseo-names{font-size:.71rem;color:var(--dim);line-height:1.5;}
 
@@ -389,7 +406,7 @@
       font-size:.62rem;color:var(--cyan);margin-bottom:.42rem;font-weight:500;
     }
     .post-body{font-size:.79rem;color:var(--dim);line-height:1.65;margin-bottom:.52rem;}
-    .post-img{width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-bottom:.6rem;}
+    .post-img{width:100%;display:block;border-radius:8px;margin-bottom:.6rem;}
     .post-link{
       display:inline-flex;align-items:center;gap:.38rem;padding:.27rem .68rem;
       background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.25);
@@ -766,7 +783,7 @@ function renderHorario(grado){
     document.getElementById('hor-aseo').innerHTML=''; return;
   }
 
-  let t='<div class="sched-scroll"><table class="sched-table"><thead><tr>';
+  let t='<div class="sched-wrap"><div class="sched-scroll"><table class="sched-table"><thead><tr>';
   t+='<th>Período / Hora</th>';
   dias.forEach(d=>{
     const td=d===TODAY;
@@ -788,10 +805,32 @@ function renderHorario(grado){
       t+='</tr>';
     }
   });
-  t+='</tbody></table></div>';
+  t+='</tbody></table></div></div>';
   document.getElementById('hor-clases').innerHTML=t;
 
-  if(h.aseo){
+  if(h.aseo && h.aseo.tipo === 'diario'){
+    let a='<div class="aseo-section"><div class="aseo-title">🧹 Horario de Aseo</div>';
+    h.aseo.dias.forEach(d=>{
+      const isToday = d.dia === TODAY;
+      const todayStyle = isToday ? ' style="background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.4)"' : '';
+      const todayHead  = isToday ? ' style="background:rgba(56,189,248,.25);color:#fff"' : '';
+      a+=`<div class="aseo-day">
+        <div class="aseo-day-head"${todayHead}>${d.dia}${isToday ? ' ✦ hoy' : ''}</div>
+        <div class="aseo-day-body"${todayStyle}>
+          <div class="aseo-col">
+            <div class="aseo-col-head">🌿 Zona</div>
+            <div class="aseo-col-names">${d.zona.join('<br>')}</div>
+          </div>
+          <div class="aseo-col">
+            <div class="aseo-col-head">🏫 Aula</div>
+            <div class="aseo-col-names">${d.aula.join('<br>')}</div>
+          </div>
+        </div>
+      </div>`;
+    });
+    a+='</div>';
+    document.getElementById('hor-aseo').innerHTML=a;
+  } else if(h.aseo && h.aseo.grupos){
     let a=`<div class="aseo-section"><div class="aseo-title">🧹 ${h.aseo.descripcion||'Rotación de aseo'}</div><div class="aseo-grid">`;
     h.aseo.grupos.forEach(g=>{
       a+=`<div class="aseo-card"><div class="aseo-week">${g.semana}</div><div class="aseo-names">${g.encargados.join('<br>')}</div></div>`;
@@ -799,7 +838,7 @@ function renderHorario(grado){
     a+='</div></div>';
     document.getElementById('hor-aseo').innerHTML=a;
   } else {
-    document.getElementById('hor-aseo').innerHTML='<p class="empty"><span class="empty-i">🧹</span>Aseo no configurado.</p>';
+    document.getElementById('hor-aseo').innerHTML='<p class="empty"><span class="empty-i">🧹</span>Horario de aseo no disponible aún.</p>';
   }
 }
 
