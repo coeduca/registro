@@ -24,20 +24,10 @@ window.COEDUCA_CONFIG = {
   // ----------------------------------------------------------
   anuncios: [
     {
-      titulo: "¡Bienvenidos al ciclo 2026!",
+      titulo: "¡Bienvenidos al año escolar 2026!",
       texto: "El portal estudiantil COEDUCA ya está disponible. Aquí podrás consultar tus calificaciones, deméritos y horarios.",
-      fecha: "15/01/2026"
+      fecha: "02/02/2026"
     },
-    {
-      titulo: "Entrega de notas — 1er Período",
-      texto: "Las calificaciones del primer período estarán disponibles a partir del 20 de marzo.",
-      fecha: "10/03/2026"
-    },
-    {
-      titulo: "Semana de exámenes",
-      texto: "Los exámenes de primer período se realizarán del 16 al 20 de marzo. Prepárense con anticipación.",
-      fecha: "02/03/2026"
-    }
   ],
 
   // ----------------------------------------------------------
@@ -45,12 +35,12 @@ window.COEDUCA_CONFIG = {
   // ----------------------------------------------------------
   herramientas: [
     { nombre: "Google Classroom",  url: "https://classroom.google.com",              icono: "🎓" },
-    { nombre: "Khan Academy",      url: "https://es.khanacademy.org",                icono: "📐" },
+    //{ nombre: "Khan Academy",      url: "https://es.khanacademy.org",                icono: "📐" },
     { nombre: "Diccionario RAE",   url: "https://dle.rae.es",                        icono: "📖" },
     { nombre: "YouTube Edu",       url: "https://www.youtube.com/education",         icono: "▶️" },
     { nombre: "Duolingo",          url: "https://www.duolingo.com",                  icono: "🦜" },
-    { nombre: "Wolfram Alpha",     url: "https://www.wolframalpha.com",              icono: "🔢" },
-    { nombre: "Biblioteca Digital",url: "https://www.cervantesvirtual.com",          icono: "📚" }
+    //{ nombre: "Wolfram Alpha",     url: "https://www.wolframalpha.com",              icono: "🔢" },
+    //{ nombre: "Biblioteca Digital",url: "https://www.cervantesvirtual.com",          icono: "📚" }
   ],
 
   // ----------------------------------------------------------
@@ -62,29 +52,22 @@ window.COEDUCA_CONFIG = {
   // ----------------------------------------------------------
   publicaciones: [
     {
-      titulo: "📝 Tarea de Matemáticas — Semana del 23 al 27 de marzo",
-      texto: "Resolver los ejercicios del capítulo 5, páginas 112-115. Entrega el lunes 30 de marzo.",
+      titulo: "📝 Tarea de Inglés — Numbers from 0 to 20",
+      texto: "Aprenderse los números del 0 al 20 en inglés para miércoles 8 de abril.",
       fecha: "23/03/2026",
       grado: "7° Grado A",
-      imagen: null,
+      imagen: "https://i.ibb.co/MkWyTLLn/black-classroom-number-signs-1-20-thumbnail-2.jpg",
       enlace: null
     },
     {
-      titulo: "🏃 Evento Deportivo — Juegos Estudiantiles",
-      texto: "Este viernes 28 de marzo se realizarán los juegos estudiantiles. Se suspenden clases a partir del mediodía. ¡Participa y apoya a tu equipo!",
+      titulo: "Juegos Intramuros 2026",
+      texto: "Se acercan los juegos intramuros. ¡Participa y apoya a tu equipo!",
       fecha: "22/03/2026",
       grado: "Todos",
       imagen: null,
       enlace: null
     },
-    {
-      titulo: "📌 Reunión de Padres de Familia",
-      texto: "Se convoca a padres de familia a reunión el sábado 4 de abril a las 8:00 a.m. en las instalaciones del centro educativo.",
-      fecha: "20/03/2026",
-      grado: "Todos",
-      imagen: null,
-      enlace: null
-    }
+   
   ]
 
 };
@@ -128,21 +111,20 @@ window.HORARIOS = {
 
   "8° Grado A": {
     periodos: [
-      { hora: "7:00 – 7:45",   etiqueta: "1° Período" },
-      { hora: "7:45 – 8:30",   etiqueta: "2° Período" },
-      { hora: "8:30 – 9:15",   etiqueta: "3° Período" },
-      { hora: "9:15 – 10:00",  etiqueta: "4° Período" },
-      { hora: "10:00 – 10:20", etiqueta: "RECREO",     recreo: true },
-      { hora: "10:20 – 11:05", etiqueta: "5° Período" },
-      { hora: "11:05 – 11:50", etiqueta: "6° Período" },
-      { hora: "11:50 – 12:35", etiqueta: "7° Período" }
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
     ],
     dias: {
-      "Lunes":      ["Matemáticas",    "Lenguaje",      "Ciencias Nat.",  "Inglés",        null, "Historia",      "Ed. Física",    "Computación"],
-      "Martes":     ["Lenguaje",       "Matemáticas",   "C. Sociales",    "Ciencias Nat.", null, "Inglés",        "Matemáticas",   "Artística"],
-      "Miércoles":  ["C. Sociales",    "Inglés",        "Matemáticas",    "Lenguaje",      null, "Ed. Física",    "Orientación",   "Matemáticas"],
-      "Jueves":     ["Inglés",         "Ciencias Nat.", "Lenguaje",       "Matemáticas",   null, "Artística",     "Computación",   "C. Sociales"],
-      "Viernes":    ["Historia",       "C. Sociales",   "Ed. Física",     "Inglés",        null, "Lenguaje",      "Orientación",   "Ciencias Nat."]
+      "Lunes":     ["Ciudadanía y Valores", null, "Innovación", "Innovación", null, "Lengua y Literatura", "Lengua y Literatura"],
+      "Martes":    ["Matemática y Datos",  null, "Educación Física", "Educación Física", null, "Lengua y Literatura", "Lengua y Literatura"],
+      "Miércoles": ["Lengua y Literatura", null, "Ciudadanía y Valores", "Ciudadanía y Valores", null, "Inglés", "Inglés"],
+      "Jueves":    ["Ciencia y Tecnología", null, "Matemática y Datos", "Matemática y Datos", null, "Ciencia y Tecnología", "Ciencia y Tecnología"],
+      "Viernes":   ["Matemática y Datos",  null, "Inglés", "Matemática y Datos", null, "Ciudadanía y Valores", "Ciudadanía y Valores"]
     },
     aseo: {
       descripcion: "Rotación semanal de limpieza del aula",
