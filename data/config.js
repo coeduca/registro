@@ -8,7 +8,8 @@ window.COEDUCA_CONFIG = {
     "8° Grado A":       "https://docs.google.com/spreadsheets/d/1bPoS13K_zrfOUh8Sv-CHF_GNeM73j9So_shGIUnUAB4/edit?usp=sharing",
     "9° Grado A":       "https://docs.google.com/spreadsheets/d/1NS2uXOHlW2nrvcD0CorsIftRcatfAFKN9z3pXJawuYU/edit?usp=sharing",
     "1° Bto. Gral. A":  "https://docs.google.com/spreadsheets/d/1VOoVlkZKeefrAXD2KgVMCR9wQ2So7N8epoflUsqGiOQ/edit?usp=sharing",
-    "2° Bto. Gral. A":  "https://docs.google.com/spreadsheets/d/1Tx2tHpFIKkdw7wPFja0fGwGxtyvK-fcspFOl2vE_c38/edit?usp=sharing"
+    "2° Bto. Gral. A":  "https://docs.google.com/spreadsheets/d/1Tx2tHpFIKkdw7wPFja0fGwGxtyvK-fcspFOl2vE_c38/edit?usp=sharing",
+    "Maestros":  ""
   },
 
   anuncios: [
@@ -188,6 +189,26 @@ window.HORARIOS = {
       "Miércoles": ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Jueves":    ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"],
       "Viernes":   ["Vacio", null, "Vacio", "Vacio", null, "Vacio", "Vacio"]
+    },
+    aseo: null
+  },
+
+  "Maestros": {
+    periodos: [
+      { hora: "12:45 – 1:45", etiqueta: "1° Período" },
+      { hora: "1:45 – 2:00",  etiqueta: "RECESO", recreo: true },
+      { hora: "2:00 – 2:45",  etiqueta: "2° Período" },
+      { hora: "2:45 – 3:30",  etiqueta: "3° Período" },
+      { hora: "3:30 – 3:55",  etiqueta: "RECESO", recreo: true },
+      { hora: "3:55 – 4:40",  etiqueta: "4° Período" },
+      { hora: "4:40 – 5:25",  etiqueta: "5° Período" }
+    ],
+    dias: {
+      "Lunes":     ["Octavo CYV", null, "2do Año ING", "2do Año ING", null, "1er Año ING", "1er Año ING"],
+      "Martes":    ["1er Año ING", null, "2do Año CCC", "2do Año CCC", null, "Séptimo ING", "Séptimo ING"],
+      "Miércoles": ["Séptimo ING", null, "Octavo CYV", "Octavo CYV", null, "Octavo ING", "Octavo ING"],
+      "Jueves":    ["Noveno ING", null, "Noveno ING", "Noveno ING", null, "2do Año ING", "2do Año ING"],
+      "Viernes":   ["2do Año CCC", null, "Octavo ING", "1er Año ING", null, "Octavo CYV", "Octavo CYV"]
     },
     aseo: null
   }
