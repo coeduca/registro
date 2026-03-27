@@ -433,6 +433,81 @@
     }
     .post-link:hover{background:rgba(86,208,245,.18);}
 
+    /* ── Reacciones ── */
+    .post-reactions{
+      display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;
+      padding-top:.55rem;margin-top:.55rem;
+      border-top:1px solid rgba(126,227,252,.08);
+    }
+    .rx-btn{
+      display:inline-flex;align-items:center;gap:.25rem;
+      padding:.25rem .55rem;border-radius:20px;
+      background:rgba(255,255,255,.04);border:1px solid rgba(126,227,252,.12);
+      color:var(--dim);font-size:.74rem;cursor:pointer;
+      font-family:inherit;transition:all .2s;user-select:none;
+    }
+    .rx-btn:hover{background:rgba(86,208,245,.1);border-color:rgba(126,227,252,.25);}
+    .rx-btn.active{
+      background:rgba(86,208,245,.15);border-color:rgba(126,227,252,.4);
+      color:var(--cyan);
+    }
+    .rx-btn .rx-emoji{font-size:.85rem;line-height:1;}
+    .rx-btn .rx-count{font-size:.68rem;font-weight:600;min-width:.6em;text-align:center;}
+
+    /* ── Comentarios ── */
+    .post-comments{margin-top:.55rem;}
+    .cmt-toggle{
+      display:inline-flex;align-items:center;gap:.3rem;
+      background:none;border:none;color:var(--dim);
+      font-size:.72rem;font-family:inherit;cursor:pointer;
+      padding:.2rem 0;transition:color .2s;
+    }
+    .cmt-toggle:hover{color:var(--cyan);}
+    .cmt-section{
+      display:none;margin-top:.5rem;
+      animation:fadeIn .2s ease;
+    }
+    .cmt-section.open{display:block;}
+    .cmt-list{
+      max-height:260px;overflow-y:auto;
+      scrollbar-width:thin;scrollbar-color:rgba(126,227,252,.15) transparent;
+      margin-bottom:.5rem;
+    }
+    .cmt-item{
+      padding:.5rem .65rem;margin-bottom:.35rem;
+      background:rgba(255,255,255,.03);border-radius:8px;
+      border-left:2px solid rgba(126,227,252,.2);
+      animation:slideUp .25s ease;
+    }
+    .cmt-item:last-child{margin-bottom:0;}
+    .cmt-head{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.18rem;}
+    .cmt-author{font-size:.7rem;font-weight:600;color:var(--cyan);}
+    .cmt-time{font-size:.6rem;color:rgba(200,242,255,.35);}
+    .cmt-text{font-size:.74rem;color:var(--dim);line-height:1.5;word-break:break-word;}
+    .cmt-empty{font-size:.72rem;color:rgba(200,242,255,.3);text-align:center;padding:.6rem;font-style:italic;}
+    .cmt-form{display:flex;gap:.35rem;align-items:flex-end;}
+    .cmt-input{
+      flex:1;padding:.5rem .7rem;
+      background:rgba(255,255,255,.05);border:1px solid rgba(126,227,252,.18);
+      border-radius:8px;color:var(--white);font-size:.76rem;
+      font-family:'DM Sans',sans-serif;outline:none;resize:none;
+      min-height:36px;max-height:80px;line-height:1.4;
+      transition:border-color .2s,background .2s;
+    }
+    .cmt-input::placeholder{color:rgba(200,242,255,.3);font-size:.73rem;}
+    .cmt-input:focus{border-color:var(--cyan);background:rgba(86,208,245,.06);}
+    .cmt-send{
+      padding:.45rem .7rem;
+      background:linear-gradient(135deg,var(--sky),var(--mid));
+      border:none;border-radius:8px;color:white;
+      font-size:.75rem;font-weight:600;cursor:pointer;
+      font-family:inherit;transition:opacity .2s,transform .15s;
+      white-space:nowrap;flex-shrink:0;
+    }
+    .cmt-send:hover{opacity:.85;transform:translateY(-1px);}
+    .cmt-send:active{transform:translateY(0);}
+    .cmt-send:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
     .empty{text-align:center;padding:1.6rem 1rem;color:var(--dim);font-size:.84rem;}
     .empty-i{font-size:2.1rem;display:block;margin-bottom:.45rem;}
 
@@ -862,21 +937,254 @@ function renderHorario(grado){
 }
 
 function renderFeed(grado){
-  const cfg=window.COEDUCA_CONFIG||{};
-  const posts=(cfg.publicaciones||[]).filter(p=>!p.grado||p.grado==='Todos'||p.grado===grado);
-  const el=document.getElementById('feed-posts');
+  var cfg=window.COEDUCA_CONFIG||{};
+  var posts=(cfg.publicaciones||[]).filter(function(p){return !p.grado||p.grado==='Todos'||p.grado===grado;});
+  var el=document.getElementById('feed-posts');
   if(!posts.length){ el.innerHTML='<p class="empty"><span class="empty-i">📭</span>Sin publicaciones por ahora.</p>'; return; }
-  let h='';
-  posts.forEach(p=>{
-    h+='<div class="post-card">';
+
+  window._feedPosts = posts.map(function(p,i){
+    return Object.assign({}, p, { _id: 'p'+simpleHash(p.titulo+p.fecha) });
+  });
+
+  // Render esqueleto inmediato (sin datos del servidor)
+  renderFeedCards(window._feedPosts);
+
+  // Cargar datos del servidor
+  if(API_URL){
+    var ids = window._feedPosts.map(function(p){ return p._id; });
+    apiGet('getData', { postIds: ids.join(',') }, function(data){
+      if(!data) return;
+      window._serverData = data; // { reactions:{pid:{like:3,...}}, myReactions:{pid:"like"}, comments:{pid:[...]} }
+      // Re-render con datos reales
+      renderFeedCards(window._feedPosts);
+    });
+  }
+}
+
+function renderFeedCards(posts){
+  var el=document.getElementById('feed-posts');
+  var sd = window._serverData || { reactions:{}, myReactions:{}, comments:{} };
+  var nie = _student ? _student.nie : '';
+  var h='';
+
+  posts.forEach(function(p){
+    var pid = p._id;
+    var rxData = sd.reactions[pid] || {};
+    var myRx = sd.myReactions[pid] || '';
+    var cmts = sd.comments[pid] || [];
+
+    h+='<div class="post-card" id="post-'+pid+'">';
     if(p.grado&&p.grado!=='Todos') h+='<div class="post-gtag">📌 '+p.grado+'</div>';
     h+='<div class="post-top"><div class="post-title">'+p.titulo+'</div><div class="post-date">'+p.fecha+'</div></div>';
     if(p.texto) h+='<div class="post-body">'+p.texto+'</div>';
     if(p.imagen) h+='<div class="post-img-wrap"><img src="'+p.imagen+'" class="post-img" alt="" loading="lazy"></div>';
     if(p.enlace) h+='<a href="'+p.enlace.url+'" target="_blank" class="post-link">🔗 '+(p.enlace.texto||'Ver enlace')+'</a>';
+
+    // Reacciones
+    h+='<div class="post-reactions" id="rx-'+pid+'">';
+    h+=buildRxHtml(pid, rxData, myRx);
+    h+='</div>';
+
+    // Comentarios
+    var cmtCount = cmts.length;
+    h+='<div class="post-comments">';
+    h+='<button class="cmt-toggle" onclick="toggleCmts(\''+pid+'\')">'
+      +'💬 <span id="cmt-lbl-'+pid+'">'+(cmtCount ? cmtCount+' comentario'+(cmtCount>1?'s':'') : 'Comentar')+'</span></button>';
+    h+='<div class="cmt-section" id="cmt-sec-'+pid+'">';
+    h+='<div class="cmt-list" id="cmt-list-'+pid+'">';
+    if(!cmts.length) h+='<div class="cmt-empty">Sé el primero en comentar</div>';
+    else cmts.forEach(function(c){ h+=buildCmtHtml(c); });
+    h+='</div>';
+    h+='<div class="cmt-form">';
+    h+='<textarea class="cmt-input" id="cmt-in-'+pid+'" placeholder="Escribe un comentario…" rows="1" '
+      +'onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();addCmt(\''+pid+'\');}"></textarea>';
+    h+='<button class="cmt-send" id="cmt-btn-'+pid+'" onclick="addCmt(\''+pid+'\')">Enviar</button>';
+    h+='</div>';
+    h+='</div></div>';
+
     h+='</div>';
   });
   el.innerHTML=h;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   API — Google Apps Script backend
+   ══════════════════════════════════════════════════════════════ */
+
+// ⚠️  PEGA AQUÍ TU URL de Apps Script (ver instrucciones en SETUP_BACKEND.md)
+var API_URL = 'https://script.google.com/a/macros/clases.edu.sv/s/AKfycbyq0TmVbEeGyG_a1EE5RM9s0AmJzBamehEHbgXPGCG8e29ZiXYNpJAH2qeAJNV2ZvlJ/exec';  // Ejemplo: 'https://script.google.com/macros/s/AKfycb.../exec'
+
+window._serverData = { reactions:{}, myReactions:{}, comments:{} };
+var _apiQueue = {};  // evita envíos duplicados
+
+function apiGet(action, params, cb){
+  if(!API_URL){ cb(null); return; }
+  var nie = _student ? _student.nie : '';
+  var qs = '?action='+action+'&nie='+encodeURIComponent(nie);
+  for(var k in params) qs += '&'+k+'='+encodeURIComponent(params[k]);
+
+  fetch(API_URL + qs)
+    .then(function(r){ return r.json(); })
+    .then(function(d){ cb(d); })
+    .catch(function(e){ console.warn('API GET error:', e); cb(null); });
+}
+
+function apiPost(action, body, cb){
+  if(!API_URL){ if(cb) cb(null); return; }
+  body.action = action;
+  body.nie = _student ? _student.nie : '';
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: {'Content-Type':'text/plain'},
+    body: JSON.stringify(body)
+  })
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if(cb) cb(d); })
+    .catch(function(e){ console.warn('API POST error:', e); if(cb) cb(null); });
+}
+
+/* ── Reactions ── */
+var REACTIONS = [
+  { key:'like',  emoji:'👍', label:'Me gusta' },
+  { key:'love',  emoji:'❤️', label:'Me encanta' },
+  { key:'laugh', emoji:'😂', label:'Jaja' },
+  { key:'wow',   emoji:'😮', label:'Wow' },
+  { key:'clap',  emoji:'👏', label:'Aplausos' }
+];
+
+function simpleHash(str){
+  var h=0;
+  for(var i=0;i<str.length;i++){ h=((h<<5)-h)+str.charCodeAt(i); h|=0; }
+  return Math.abs(h).toString(36);
+}
+
+function buildRxHtml(pid, rxData, myRx){
+  var h='';
+  REACTIONS.forEach(function(r){
+    var count = rxData[r.key]||0;
+    var active = myRx===r.key?' active':'';
+    h+='<button class="rx-btn'+active+'" onclick="toggleRx(\''+pid+'\',\''+r.key+'\')" title="'+r.label+'">'
+      +'<span class="rx-emoji">'+r.emoji+'</span>'
+      +'<span class="rx-count">'+(count||'')+'</span>'
+      +'</button>';
+  });
+  return h;
+}
+
+function toggleRx(pid, key){
+  var sd = window._serverData;
+  var rxData = sd.reactions[pid] || {};
+  var myPrev = sd.myReactions[pid] || '';
+
+  // Actualización optimista (UI inmediata)
+  if(myPrev === key){
+    rxData[key] = Math.max(0, (rxData[key]||1) - 1);
+    if(!rxData[key]) delete rxData[key];
+    sd.myReactions[pid] = '';
+  } else {
+    if(myPrev && rxData[myPrev]){
+      rxData[myPrev] = Math.max(0, rxData[myPrev] - 1);
+      if(!rxData[myPrev]) delete rxData[myPrev];
+    }
+    rxData[key] = (rxData[key]||0) + 1;
+    sd.myReactions[pid] = key;
+  }
+  sd.reactions[pid] = rxData;
+
+  // Actualizar UI
+  var el = document.getElementById('rx-'+pid);
+  if(el) el.innerHTML = buildRxHtml(pid, rxData, sd.myReactions[pid]);
+
+  // Enviar al servidor
+  apiPost('react', { postId: pid, reaction: key }, function(resp){
+    // Si el servidor responde, sincronizar datos reales
+    if(resp && resp.reactions){
+      sd.reactions[pid] = resp.reactions;
+      sd.myReactions[pid] = resp.myReaction || '';
+      if(el) el.innerHTML = buildRxHtml(pid, sd.reactions[pid], sd.myReactions[pid]);
+    }
+  });
+}
+
+/* ── Comments ── */
+function getShortName(){
+  if(!_student) return 'Anónimo';
+  var parts = _student.nombre.split(',');
+  if(parts.length>1) return parts[1].trim().split(' ')[0]+' '+parts[0].trim().split(' ')[0];
+  return _student.nombre.split(' ')[0];
+}
+
+function buildCmtHtml(c){
+  return '<div class="cmt-item">'
+    +'<div class="cmt-head"><span class="cmt-author">'+escHtml(c.author)+'</span>'
+    +'<span class="cmt-time">'+escHtml(c.time)+'</span></div>'
+    +'<div class="cmt-text">'+escHtml(c.text)+'</div>'
+    +'</div>';
+}
+
+function escHtml(s){
+  if(!s) return '';
+  var d=document.createElement('div');d.textContent=s;return d.innerHTML;
+}
+
+function toggleCmts(pid){
+  var sec = document.getElementById('cmt-sec-'+pid);
+  if(sec) sec.classList.toggle('open');
+}
+
+function addCmt(pid){
+  var input = document.getElementById('cmt-in-'+pid);
+  var btn   = document.getElementById('cmt-btn-'+pid);
+  if(!input) return;
+  var text = input.value.trim();
+  if(!text) return;
+
+  // Deshabilitar para evitar doble envío
+  if(btn){ btn.disabled=true; btn.textContent='…'; }
+
+  var now = new Date();
+  var time = now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear()+' '
+           + String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  var author = getShortName();
+
+  var newCmt = { author: author, text: text, time: time };
+
+  // UI optimista
+  var list = document.getElementById('cmt-list-'+pid);
+  if(list){
+    var empty = list.querySelector('.cmt-empty');
+    if(empty) empty.remove();
+    list.insertAdjacentHTML('beforeend', buildCmtHtml(newCmt));
+    list.scrollTop = list.scrollHeight;
+  }
+  input.value='';
+
+  // Guardar localmente
+  var sd = window._serverData;
+  if(!sd.comments[pid]) sd.comments[pid] = [];
+  sd.comments[pid].push(newCmt);
+  var n = sd.comments[pid].length;
+  var lbl = document.getElementById('cmt-lbl-'+pid);
+  if(lbl) lbl.textContent = n + ' comentario' + (n>1?'s':'');
+
+  // Enviar al servidor
+  apiPost('comment', { postId: pid, author: author, text: text }, function(resp){
+    if(btn){ btn.disabled=false; btn.textContent='Enviar'; }
+    // Sincronizar si el servidor retorna la lista actualizada
+    if(resp && resp.comments){
+      sd.comments[pid] = resp.comments;
+      // Re-render la lista completa para mostrar comentarios de otros
+      if(list){
+        var ch='';
+        resp.comments.forEach(function(c){ ch+=buildCmtHtml(c); });
+        list.innerHTML = ch || '<div class="cmt-empty">Sé el primero en comentar</div>';
+        list.scrollTop = list.scrollHeight;
+      }
+      var nn = resp.comments.length;
+      if(lbl) lbl.textContent = nn + ' comentario' + (nn>1?'s':'');
+    }
+  });
 }
 
 function buildDrawer(){
